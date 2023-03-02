@@ -1,6 +1,7 @@
 // DEPENDENCIES
 const express = require('express')
 const methodOverride = require('method-override')
+const mongoose = require('mongoose')
 
 
 // CONFIGURATION
@@ -15,6 +16,16 @@ app.engine('jsx', require('express-react-views').createEngine())
 app.use(express.urlencoded({extended: true}))
 app.use(express.static('public'))
 app.use(methodOverride('_method'))
+
+mangoose.connect(process.env.MONGO_URI,
+  {
+    useNewUrlParser: true,
+    useUnifiedTopolagy: true
+  }).then(() => {
+    console.log('connect to mongo: ', process.env.MONGO_URI);
+  }).catch((err) => {
+    console.error('Error connecting to MongoDB:', err);
+  });
 
 
 
