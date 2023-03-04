@@ -1,7 +1,8 @@
 const React = require('react')
+const breads = require('../controllers/breads_controller')
 const Default = require('./layouts/Default')
 
-function Show ({bread, index}) {
+function Show ({bread}) {
     // Confirm we are getting our bread data in the terminal.
     // console.log(bread.name)
       return (
@@ -17,16 +18,15 @@ function Show ({bread, index}) {
                have gluten.
             </p>
             <img src={bread.image} alt={bread.name} />
-            <form action={`/breads/${index}?_method=DELETE`} method="POST">
-             <input type='submit' value="DELETE"/>
+            <p>{bread.getBakedBy()}</p>
+            <p>Baker Joey Daked: </p>
+            <a href={`/breads/${bread.id}/edit`}><button>Edit</button></a>          
+            <form action={`/breads/${bread.id}?_method=DELETE`} method="POST">
+              <input type='submit' value="DELETE"/>
             </form>
-            <div className="newButton"> 
-              <a href={"/breads/" + index + "/edit/"}><button>Edit {bread.name}</button></a>
-            </div>
             <div className="newButton">
                  <a href="/breads/"><button>Go Home</button></a>
             </div>
-            
         </Default>
       )
   }
